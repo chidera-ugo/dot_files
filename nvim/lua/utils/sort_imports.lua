@@ -1,5 +1,5 @@
 local fn = vim.fn
-local loop = vim.loop
+local uv = vim.uv or vim.uv
 
 local M = {}
 
@@ -27,8 +27,8 @@ function M.sort_import(async)
 	local winview = fn.winsaveview()
 	local path = fn.fnameescape(fn.expand("%:p"))
 	local executable_path = find_executable()
-	local stdout = loop.new_pipe(false)
-	local stderr = loop.new_pipe(false)
+	local stdout = uv.new_pipe(false)
+	local stderr = uv.new_pipe(false)
 
 	if fn.executable(executable_path) then
 		if true == async then
@@ -60,28 +60,28 @@ function M.setup()
 end
 
 local function safe_close(handle)
-	if not loop.is_closing(handle) then
-		loop.close(handle)
+	if not uv.is_closing(handle) then
+		uv.close(handle)
 	end
 end
 
 function spawn(cmd, opts, input, onexit)
 	local input = input or { stdout = function() end, stderr = function() end }
 	local handle, pid
-	local stdout = loop.new_pipe(false)
-	local stderr = loop.new_pipe(false)
-	handle, pid = loop.spawn(cmd, vim.tbl_extend("force", opts, { stdio = { stdout, stderr } }), function(code, signal)
+	local stdout = uv.new_pipe(false)
+	local stderr = uv.new_pipe(false)
+	handle, pid = uv.spawn(cmd, vim.tbl_extend("force", opts, { stdio = { stdout, stderr } }), function(code, signal)
 		if type(onexit) == "function" then
 			onexit(code, signal)
 		end
-		loop.read_stop(stdout)
-		loop.read_stop(stderr)
+		uv.read_stop(stdout)
+		uv.read_stop(stderr)
 		safe_close(handle)
 		safe_close(stdout)
 		safe_close(stderr)
 	end)
-	loop.read_start(stdout, input.stdout)
-	loop.read_start(stderr, input.stderr)
+	uv.read_start(stdout, input.stdout)
+	uv.read_start(stderr, input.stderr)
 end
 
 return M
