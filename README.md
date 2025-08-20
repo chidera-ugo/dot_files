@@ -4,13 +4,9 @@ This directory contains configuration files for various tools. Follow the steps 
 
 ## Initial Setup
 
-1. **Clone and move dotfiles**
+1. **Clone dotfiles**
    ```bash
-   git clone <your-dotfiles-repo> ~/dotfiles
-   # Move nvim config
-   mv ~/dotfiles/nvim ~/.config/nvim
-   # Move tmux config  
-   mv ~/dotfiles/tmux ~/.config/tmux
+   git clone https://github.com/chidera-ugo/dot_files ~/.config
    ```
 
 ## Neovim Setup
