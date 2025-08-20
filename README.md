@@ -45,7 +45,7 @@ npm install -g import-sort-cli import-sort-parser-babylon import-sort-style-esli
 
 2. **Install TPM (Tmux Plugin Manager)**
    ```bash
-   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
    ```
 
 3. **Start tmux and install plugins**
