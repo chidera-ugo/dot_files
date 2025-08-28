@@ -12,7 +12,7 @@ o.expandtab = true
 
 o.smartindent = true
 
-o.wrap = true
+o.wrap = false
 
 o.swapfile = false
 o.backup = false

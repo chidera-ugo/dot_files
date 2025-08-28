@@ -21,19 +21,42 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
+					{ name = "copilot", group_index = 2 },
+					{ name = "nvim_lsp", group_index = 2 },
+					{ name = "luasnip", group_index = 2 },
 				}, {
-					{ name = "buffer" },
+					{ name = "buffer", group_index = 2 },
 				}),
 			})
 		end,
 	},
-	"hrsh7th/cmp-nvim-lsp",
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
 	},
+	{
+		"zbirenbaum/copilot-cmp",
+		dependencies = { "github/copilot.vim" },
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
+	"github/copilot.vim",
+	"hrsh7th/cmp-nvim-lsp",
 }
