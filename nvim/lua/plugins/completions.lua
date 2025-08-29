@@ -55,6 +55,10 @@ return {
 		dependencies = { "github/copilot.vim" },
 		config = function()
 			require("copilot_cmp").setup()
+			vim.keymap.set("i", "<C-P>", function()
+				require("copilot.suggestion").accept()
+			end, { desc = "Accept Copilot suggestion" })
+			vim.g.copilot_no_tab_map = true
 		end,
 	},
 	"github/copilot.vim",
