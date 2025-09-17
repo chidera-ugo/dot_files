@@ -51,16 +51,27 @@ return {
 		dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
 	},
 	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = { "github/copilot.vim" },
+		"supermaven-inc/supermaven-nvim",
 		config = function()
-			require("copilot_cmp").setup()
-			vim.keymap.set("i", "<C-P>", function()
-				require("copilot.suggestion").accept()
-			end, { desc = "Accept Copilot suggestion" })
-			vim.g.copilot_no_tab_map = true
+			require("supermaven-nvim").setup({
+				keymaps = {
+					accept_suggestion = "<C-a>",
+					-- clear_suggestion = "<C-<>",
+					-- accept_word = "<C->>",
+				},
+				ignore_filetypes = { cpp = true }, -- or { "cpp", }
+				-- color = {
+				-- suggestion_color = "#ffffff",
+				-- cterm = 244,
+				-- },
+				log_level = "info", -- set to "off" to disable logging completely
+				disable_inline_completion = false, -- disables inline completion for use with cmp
+				disable_keymaps = false, -- disables built in keymaps for more manual control
+				condition = function()
+					return false
+				end,
+			})
 		end,
 	},
-	"github/copilot.vim",
 	"hrsh7th/cmp-nvim-lsp",
 }

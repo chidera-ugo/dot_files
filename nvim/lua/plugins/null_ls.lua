@@ -11,7 +11,9 @@ return {
 
 			local sources = {
 				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.prettierd,
+				null_ls.builtins.formatting.prettierd.with({
+					prefer_local = "node_modules/.bin",
+				}),
 			}
 
 			null_ls.setup({
