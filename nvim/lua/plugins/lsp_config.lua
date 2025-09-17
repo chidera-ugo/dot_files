@@ -17,11 +17,26 @@ return {
 
 			lspconfig.eslint.setup({
 				capabilities = capabilities,
+				root_dir = function(fname)
+					return lspconfig.util.root_pattern(
+						".eslintrc",
+						".eslintrc.js",
+						".eslintrc.cjs",
+						".eslintrc.yaml",
+						".eslintrc.yml",
+						".eslintrc.json",
+						"eslint.config.js",
+						"eslint.config.mjs",
+						"eslint.config.cjs",
+						"eslint.config.ts",
+						"eslint.config.mts",
+						"eslint.config.cts",
+						"package.json"
+					)(fname) or lspconfig.util.find_git_ancestor(fname)
+				end,
 				settings = {
 					eslint = {
-						experimental = {
-							useFlatConfig = true,
-						},
+						workingDirectories = { mode = "auto" },
 					},
 				},
 			})
