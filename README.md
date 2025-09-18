@@ -30,6 +30,10 @@ This directory contains configuration files for various tools. Follow the steps 
    nvim
    ```
    Plugins will automatically install via lazy.nvim on first launch then run `Mason` to install packages
+   Install `stylua` and `prettierd`
+
+   `brew install prettierd`
+   `brew install stylua`
 
 ### Sort Imports
 Install global npm packages for import sorting functionality:
