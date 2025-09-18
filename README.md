@@ -29,7 +29,7 @@ This directory contains configuration files for various tools. Follow the steps 
    ```bash
    nvim
    ```
-   Plugins will automatically install via lazy.nvim on first launch.
+   Plugins will automatically install via lazy.nvim on first launch then run `Mason` to install packages
 
 ### Sort Imports
 Install global npm packages for import sorting functionality:
@@ -53,7 +53,7 @@ npm install -g import-sort-cli import-sort-parser-babylon import-sort-style-esli
 3. **Start tmux and install plugins**
    ```bash
    tmux
-   # Inside tmux, press: Prefix + I (usually Ctrl-b + I)
+   # Inside tmux, press: Prefix + I (usually Ctrl-x + I)
    ```
 
 ## Additional Setup
